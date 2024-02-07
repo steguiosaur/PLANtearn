@@ -71,7 +71,7 @@ public class MyGardenView extends JPanel {
 
     // Method to simulate checking database for values
     private boolean databaseIsEmpty() {
-        return true;
+        return false;
     }
 }
 

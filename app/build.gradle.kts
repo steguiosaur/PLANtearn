@@ -23,6 +23,8 @@ dependencies {
 
     // This dependency is used by the application.
     implementation(libs.guava)
+
+    implementation("org.xerial:sqlite-jdbc:3.34.0") // SQLite JDBC drive
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -36,8 +38,6 @@ application {
     // Define the main class for the application.
     mainClass.set("plantearn.App")
 }
-
-
 
 tasks {
     named<Test>("test") {
