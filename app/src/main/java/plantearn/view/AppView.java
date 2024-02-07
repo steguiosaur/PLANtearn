@@ -1,7 +1,7 @@
 package plantearn.view;
 
 import java.awt.*;
-//import java.awt.event.ActionListener;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class AppView extends JFrame {
@@ -11,7 +11,13 @@ public class AppView extends JFrame {
 
     private JPanel imageContainerPanel;
     private JLabel nameContainerLabel;
-    private JLabel currentPageLabel;
+
+    private MyGardenView panelGarden;
+    private MyTasksView panelTask;
+    private MyHistoryView panelHistory;
+
+    private JPanel fieldPanel;
+    private CardLayout cardLayout;
 
     public AppView() {
         this.setTitle("PLANtearn");
@@ -19,12 +25,8 @@ public class AppView extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.initializeMenu();
-        this.initializeSidePanel();
         this.initializeFieldPanel();
-    }
-
-    public void setCurrentPageLabel(String newCurrentPageLabel) {
-        this.currentPageLabel.setText(newCurrentPageLabel);
+        this.initializeSidePanel();
     }
 
     private void initializeMenu() {
@@ -54,37 +56,97 @@ public class AppView extends JFrame {
         sidePanel.setPreferredSize(new Dimension(this.getWidth()/4, this.getHeight()));
         sidePanel.setBackground(Color.decode("#3d550c"));
 
+        JPanel titleTaglinePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 10));
+        titleTaglinePanel.setBackground(Color.decode("#3d550c"));
+
         JLabel titleLabel = new JLabel("PLANtearn");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 34));
         titleLabel.setForeground(Color.decode("#ddeedd"));
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        sidePanel.add(titleLabel);
+        titleTaglinePanel.add(titleLabel);
+
+        JLabel tagLineLabel = new JLabel("Earn the time through plant tracking");
+        tagLineLabel.setFont(new Font("Arial", Font.BOLD, 10));
+        tagLineLabel.setForeground(Color.decode("#ddeedd"));
+        tagLineLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        titleTaglinePanel.add(tagLineLabel);
+
+        sidePanel.add(titleTaglinePanel);
 
         this.gardenButton = new JButton("My Garden");
-        gardenButton.setBorder(BorderFactory.createEmptyBorder(10, 10, 10 ,10));
+        gardenButton.setFont(new Font("Calibri", Font.BOLD, 12));
         sidePanel.add(gardenButton);
 
         this.tasksButton = new JButton("My Tasks");
-        tasksButton.setBorder(BorderFactory.createEmptyBorder(10, 10, 10 ,10));
+        tasksButton.setFont(new Font("Calibri", Font.BOLD, 12));
         sidePanel.add(tasksButton);
 
         this.historyButton = new JButton("My History");
-        historyButton.setBorder(BorderFactory.createEmptyBorder(10, 10, 10 ,10));
+        historyButton.setFont(new Font("Calibri", Font.BOLD, 12));
         sidePanel.add(historyButton);
 
+        gardenButton.addActionListener(e -> showPanel("panelGarden"));
+        tasksButton.addActionListener(e -> showPanel("panelTask"));
+        historyButton.addActionListener(e -> showPanel("panelHistory"));
+
         this.imageContainerPanel = new JPanel();
+        imageContainerPanel.setBackground(Color.decode("#ddeedd"));
         sidePanel.add(imageContainerPanel);
 
-        this.nameContainerLabel = new JLabel("Insert Name");
+        this.nameContainerLabel = new JLabel("Juan Dela Cruz");
+        nameContainerLabel.setFont(new Font("Arial", Font.BOLD, 14));
+        nameContainerLabel.setForeground(Color.decode("#ddeedd"));
+        nameContainerLabel.setHorizontalAlignment(SwingConstants.CENTER);
         sidePanel.add(nameContainerLabel);
 
         this.getContentPane().add(BorderLayout.WEST, sidePanel);
     }
 
     private void initializeFieldPanel() {
-        JPanel fieldPanel = new JPanel(new GridLayout(3, 1));
+        fieldPanel = new JPanel();
+        cardLayout = new CardLayout();
+        fieldPanel.setLayout(cardLayout);
         fieldPanel.setBackground(Color.decode("#dfe49b"));
+
+        panelGarden = new MyGardenView();
+        panelTask = new MyTasksView();
+        panelHistory = new MyHistoryView();
+
+        fieldPanel.add(panelGarden, "panelGarden");
+        fieldPanel.add(panelTask, "panelTask");
+        fieldPanel.add(panelHistory, "panelHistory");
+
+        //showPanel("panelGarden");
 
         this.getContentPane().add(BorderLayout.CENTER, fieldPanel);
     }
+
+    private void showPanel(String panel) {
+        cardLayout.show(fieldPanel, panel);
+    }
+
+    // // Inside the AppView class
+    // public void addGardenButtonListener(ActionListener listener) {
+    //     gardenButton.addActionListener(listener);
+    // }
+    //
+    // public void addTasksButtonListener(ActionListener listener) {
+    //     tasksButton.addActionListener(listener);
+    // }
+    //
+    // public void addHistoryButtonListener(ActionListener listener) {
+    //     historyButton.addActionListener(listener);
+    // }
+    //
+    // public void showGardenPanel() {
+    //     cardLayout.show(fieldPanel, panelGarden.getName());
+    // }
+    //
+    // public void showTasksPanel() {
+    //     cardLayout.show(fieldPanel, panelTask.getName());
+    // }
+    //
+    // public void showHistoryPanel() {
+    //     cardLayout.show(fieldPanel, panelHistory.getName());
+    // }
 }
