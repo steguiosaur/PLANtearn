@@ -69,7 +69,6 @@ public class AppView extends JFrame {
         tagLineLabel.setForeground(Color.decode("#ddeedd"));
         tagLineLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleTaglinePanel.add(tagLineLabel);
-
         sidePanel.add(titleTaglinePanel);
 
         this.gardenButton = new JButton("My Garden");
