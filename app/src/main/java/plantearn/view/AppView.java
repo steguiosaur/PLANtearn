@@ -1,7 +1,6 @@
 package plantearn.view;
 
 import java.awt.*;
-import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class AppView extends JFrame {
@@ -116,37 +115,10 @@ public class AppView extends JFrame {
         fieldPanel.add(panelTask, "panelTask");
         fieldPanel.add(panelHistory, "panelHistory");
 
-        //showPanel("panelGarden");
-
         this.getContentPane().add(BorderLayout.CENTER, fieldPanel);
     }
 
     private void showPanel(String panel) {
         cardLayout.show(fieldPanel, panel);
     }
-
-    // // Inside the AppView class
-    // public void addGardenButtonListener(ActionListener listener) {
-    //     gardenButton.addActionListener(listener);
-    // }
-    //
-    // public void addTasksButtonListener(ActionListener listener) {
-    //     tasksButton.addActionListener(listener);
-    // }
-    //
-    // public void addHistoryButtonListener(ActionListener listener) {
-    //     historyButton.addActionListener(listener);
-    // }
-    //
-    // public void showGardenPanel() {
-    //     cardLayout.show(fieldPanel, panelGarden.getName());
-    // }
-    //
-    // public void showTasksPanel() {
-    //     cardLayout.show(fieldPanel, panelTask.getName());
-    // }
-    //
-    // public void showHistoryPanel() {
-    //     cardLayout.show(fieldPanel, panelHistory.getName());
-    // }
 }
